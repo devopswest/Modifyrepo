@@ -9,7 +9,7 @@ services:
             - 'APP_NAME=library'
             - 'DOCKER_USER=andresfuentes'
             - 'DOCKER_REPO=pwcusadc'
-            - 'DOCKER_PASSWORD={password}'
+            - 'DOCKER_PASSWORD=SOME_PASSWORD'
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
             - "/usr/bin/docker:/usr/bin/docker"
@@ -35,10 +35,10 @@ services:
             # - 'APP_server.port=8080'
             # - 'APP_db.url=jdbc:postgresql://adc-dev-swarm-master.eastus.cloudapp.azure.com:5432/library'
             # - 'APP_db.username=postgres'
-            # - 'APP_db.password={password}'
+            # - 'APP_db.password=SOME_PASSWORD'
             # - 'APP_spring.datasource.url=jdbc:postgresql://adc-dev-swarm-master.eastus.cloudapp.azure.com:5432/library'
             # - 'APP_spring.datasource.username=postgres'
-            # - 'APP_spring.datasource.password={password}'
+            # - 'APP_spring.datasource.password=SOME_PASSWORD'
             # - 'APP_spring.data.elasticsearch.cluster-name=elasticsearch'
             # - 'APP_spring.data.elasticsearch.cluster-nodes=adc-dev-swarm-master.eastus.cloudapp.azure.com:9300'
             # - 'APP_spring.profiles.active=prod,swagger'
@@ -61,4 +61,5 @@ services:
             # - 'affinity:container!=~*app*'
 
 
+WITH A NEW LINE
 WITH A NEW LINE
