@@ -1,0 +1,63 @@
+version: '2'
+services:
+
+    cicd:
+        image: 'easydevops/cicd'
+        environment:
+            - 'DOCKER_TARGET=tcp://adc-dev-swarm-master.eastus.cloudapp.azure.com:4243'
+            - 'HEALTH_CHECK=tcp://adc-dev-swarm-master.eastus.cloudapp.azure.com:8080'
+            - 'APP_NAME=library'
+            - 'DOCKER_USER=andresfuentes'
+            - 'DOCKER_REPO=pwcusadc'
+            - 'DOCKER_PASSWORD={password}'
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+            - "/usr/bin/docker:/usr/bin/docker"
+            - "/var/jenkins_home:/var/jenkins_home"
+            - "$PWD:/var/app"
+            - "$HOME/.m2:/root/.m2"
+
+    #
+    # docker-compose run --service-ports app
+    #
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: 'pwcusadc/library:dev'
+        ports:
+            -  '8080:8080'
+        stdin_open: true
+        tty: true
+        #restart: always
+        environment:
+            - 'WHO_IS_THIS=ME'
+            # - 'APP_server.port=8080'
+            # - 'APP_db.url=jdbc:postgresql://adc-dev-swarm-master.eastus.cloudapp.azure.com:5432/library'
+            # - 'APP_db.username=postgres'
+            # - 'APP_db.password={password}'
+            # - 'APP_spring.datasource.url=jdbc:postgresql://adc-dev-swarm-master.eastus.cloudapp.azure.com:5432/library'
+            # - 'APP_spring.datasource.username=postgres'
+            # - 'APP_spring.datasource.password={password}'
+            # - 'APP_spring.data.elasticsearch.cluster-name=elasticsearch'
+            # - 'APP_spring.data.elasticsearch.cluster-nodes=adc-dev-swarm-master.eastus.cloudapp.azure.com:9300'
+            # - 'APP_spring.profiles.active=prod,swagger'
+            # - 'JVM_Dcom.sun.management.jmxremote'
+            # - 'JVM_Dcom.sun.management.jmxremote.port=5000'
+            # - 'JVM_Dcom.sun.management.jmxremote.ssl=false'
+            # - 'JVM_Djava.rmi.server.hostname=$(hostname -I)'
+            # - 'JVM_Dcom.sun.management.jmxremote.authenticate=false'
+            # - 'JVM_Djava.security.egd=file:/dev/./urandom'
+            # - 'JVM_Xdebug'
+            # - 'JVM_Xrunjdwp:server=y,transport=dt_socket,address=4000,suspend=n'
+            # - 'JVM_Xms16m'
+            # - 'JVM_Xmx1g'
+            # - 'XXX_MinHeapFreeRatio=10'
+            # - 'XXX_MaxHeapFreeRatio=25'
+            # - 'JVM_Xss320k'
+            # - 'XXX_MetaspaceSize=16m'
+            # - 'XXX_MaxMetaspaceSize=1g'
+            # - 'constraint:tier.app==true'
+            # - 'affinity:container!=~*app*'
+
+
